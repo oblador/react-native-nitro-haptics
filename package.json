@@ -39,7 +39,10 @@
   ],
   "keywords": [
     "react-native",
-    "nitro"
+    "nitro",
+    "nitro-module",
+    "haptics",
+    "haptic-feedback"
   ],
   "repository": {
     "type": "git",
