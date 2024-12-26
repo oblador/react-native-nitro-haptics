@@ -1,0 +1,38 @@
+#
+name: CI
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize]
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.yml'
+      - '!.github/workflows/ci.yml'
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.yml'
+      - '!.github/workflows/ci.yml'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: ${{ github.ref_name != 'master' }}
+
+jobs:
+  static-analysis:
+    name: Static Analysis
+    strategy:
+      fail-fast: false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run lint-ci
