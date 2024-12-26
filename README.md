@@ -6,7 +6,7 @@
 
 ---
 
-[![CI](https://github.com/oblador/react-native-nitro-haptics/actions/workflows/ci.yml/badge.svg)](https://github.com/oblador/react-native-nitro-haptics/actions/workflows/ci.yml) [![NPM Version](https://img.shields.io/npm/v/react-native-nitro-haptics)](https://www.npmjs.com/package/react-native-nitro-haptics) [![NPM License](https://img.shields.io/npm/l/react-native-nitro-haptics)](https://github.com/oblador/react-native-nitro-haptics/blob/main/LICENSE)
+[![CI](https://github.com/oblador/react-native-nitro-haptics/actions/workflows/ci.yml/badge.svg)](https://github.com/oblador/react-native-nitro-haptics/actions/workflows/ci.yml) [![NPM Version](https://img.shields.io/npm/v/react-native-nitro-haptics)](https://www.npmjs.com/package/react-native-nitro-haptics) [![NPM License](https://img.shields.io/npm/l/react-native-nitro-haptics)](https://github.com/oblador/react-native-nitro-haptics/blob/master/LICENSE)
 
 ## Features
 
