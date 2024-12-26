@@ -14,8 +14,8 @@ namespace margelo::nitro::haptics {
     HybridObject::loadHybridMethods();
     // load custom methods/properties
     registerHybrids(this, [](Prototype& prototype) {
-      prototype.registerHybridMethod("notification", &HybridHapticsSpec::notification);
       prototype.registerHybridMethod("impact", &HybridHapticsSpec::impact);
+      prototype.registerHybridMethod("notification", &HybridHapticsSpec::notification);
       prototype.registerHybridMethod("selection", &HybridHapticsSpec::selection);
     });
   }

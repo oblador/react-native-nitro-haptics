@@ -51,8 +51,8 @@ namespace margelo::nitro::haptics {
 
   public:
     // Methods
-    void notification(NotificationFeedbackType style) override;
     void impact(ImpactFeedbackStyle style) override;
+    void notification(NotificationFeedbackType type) override;
     void selection() override;
 
   private:

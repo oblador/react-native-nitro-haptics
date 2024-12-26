@@ -19,7 +19,7 @@ export type ImpactFeedbackStyle =
 
 export interface Haptics
   extends HybridObject<{ ios: 'swift'; android: 'kotlin' }> {
-  notification(style: NotificationFeedbackType): void;
   impact(style: ImpactFeedbackStyle): void;
+  notification(type: NotificationFeedbackType): void;
   selection(): void;
 }

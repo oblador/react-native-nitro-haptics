@@ -7,15 +7,15 @@
 
 #include "JHybridHapticsSpec.hpp"
 
-// Forward declaration of `NotificationFeedbackType` to properly resolve imports.
-namespace margelo::nitro::haptics { enum class NotificationFeedbackType; }
 // Forward declaration of `ImpactFeedbackStyle` to properly resolve imports.
 namespace margelo::nitro::haptics { enum class ImpactFeedbackStyle; }
+// Forward declaration of `NotificationFeedbackType` to properly resolve imports.
+namespace margelo::nitro::haptics { enum class NotificationFeedbackType; }
 
-#include "NotificationFeedbackType.hpp"
-#include "JNotificationFeedbackType.hpp"
 #include "ImpactFeedbackStyle.hpp"
 #include "JImpactFeedbackStyle.hpp"
+#include "NotificationFeedbackType.hpp"
+#include "JNotificationFeedbackType.hpp"
 
 namespace margelo::nitro::haptics {
 
@@ -38,13 +38,13 @@ namespace margelo::nitro::haptics {
   
 
   // Methods
-  void JHybridHapticsSpec::notification(NotificationFeedbackType style) {
-    static const auto method = _javaPart->getClass()->getMethod<void(jni::alias_ref<JNotificationFeedbackType> /* style */)>("notification");
-    method(_javaPart, JNotificationFeedbackType::fromCpp(style));
-  }
   void JHybridHapticsSpec::impact(ImpactFeedbackStyle style) {
     static const auto method = _javaPart->getClass()->getMethod<void(jni::alias_ref<JImpactFeedbackStyle> /* style */)>("impact");
     method(_javaPart, JImpactFeedbackStyle::fromCpp(style));
+  }
+  void JHybridHapticsSpec::notification(NotificationFeedbackType type) {
+    static const auto method = _javaPart->getClass()->getMethod<void(jni::alias_ref<JNotificationFeedbackType> /* type */)>("notification");
+    method(_javaPart, JNotificationFeedbackType::fromCpp(type));
   }
   void JHybridHapticsSpec::selection() {
     static const auto method = _javaPart->getClass()->getMethod<void()>("selection");

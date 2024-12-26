@@ -29,24 +29,6 @@ class HybridHaptics: HybridHapticsSpec() {
       context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
     }
 
-  private val notificationTypes = mapOf(
-    NotificationFeedbackType.SUCCESS to HapticsVibrationType(
-      longArrayOf(0, 40, 100, 40),
-      intArrayOf(0, 50, 0, 60),
-      longArrayOf(0, 40, 100, 40)
-    ),
-    NotificationFeedbackType.WARNING to HapticsVibrationType(
-      longArrayOf(0, 40, 120, 60),
-      intArrayOf(0, 40, 0, 60),
-      longArrayOf(0, 40, 120, 60)
-    ),
-    NotificationFeedbackType.ERROR to HapticsVibrationType(
-      longArrayOf(0, 60, 100, 40, 80, 50),
-      intArrayOf(0, 50, 0, 40, 0, 50),
-      longArrayOf(0, 60, 100, 40, 80, 50)
-    )
-  )
-
   private val impactTypes = mapOf(
     ImpactFeedbackStyle.LIGHT to HapticsVibrationType(
       longArrayOf(0, 50),
@@ -75,26 +57,44 @@ class HybridHaptics: HybridHapticsSpec() {
     )
   )
 
+  private val notificationTypes = mapOf(
+    NotificationFeedbackType.SUCCESS to HapticsVibrationType(
+      longArrayOf(0, 40, 100, 40),
+      intArrayOf(0, 50, 0, 60),
+      longArrayOf(0, 40, 100, 40)
+    ),
+    NotificationFeedbackType.WARNING to HapticsVibrationType(
+      longArrayOf(0, 40, 120, 60),
+      intArrayOf(0, 40, 0, 60),
+      longArrayOf(0, 40, 120, 60)
+    ),
+    NotificationFeedbackType.ERROR to HapticsVibrationType(
+      longArrayOf(0, 60, 100, 40, 80, 50),
+      intArrayOf(0, 50, 0, 40, 0, 50),
+      longArrayOf(0, 60, 100, 40, 80, 50)
+    )
+  )
+
   private val selectionType = HapticsVibrationType(
     timings = longArrayOf(0, 50),
     amplitudes = intArrayOf(0, 30),
     oldSDKPattern = longArrayOf(0, 70)
   )
-
-  @DoNotStrip
-  @Keep
-  override fun notification(style: NotificationFeedbackType): Unit {
-    val vibrationType: HapticsVibrationType = notificationTypes.getOrElse(style) {
-      throw Error("'style' must be one of ['success', 'warning', 'error']. Obtained $style'.")
-    }
-    vibrate(vibrationType)
-  }
   
   @DoNotStrip
   @Keep
   override fun impact(style: ImpactFeedbackStyle): Unit {
     val vibrationType: HapticsVibrationType = impactTypes.getOrElse(style) {
       throw Error("'style' must be one of ['light', 'medium', 'heavy', 'rigid', 'soft']. Obtained $style'.")
+    }
+    vibrate(vibrationType)
+  }
+
+  @DoNotStrip
+  @Keep
+  override fun notification(type: NotificationFeedbackType): Unit {
+    val vibrationType: HapticsVibrationType = notificationTypes.getOrElse(type) {
+      throw Error("'type' must be one of ['success', 'warning', 'error']. Obtained $type'.")
     }
     vibrate(vibrationType)
   }

@@ -13,13 +13,13 @@
 #error NitroModules cannot be found! Are you sure you installed NitroModules properly?
 #endif
 
-// Forward declaration of `NotificationFeedbackType` to properly resolve imports.
-namespace margelo::nitro::haptics { enum class NotificationFeedbackType; }
 // Forward declaration of `ImpactFeedbackStyle` to properly resolve imports.
 namespace margelo::nitro::haptics { enum class ImpactFeedbackStyle; }
+// Forward declaration of `NotificationFeedbackType` to properly resolve imports.
+namespace margelo::nitro::haptics { enum class NotificationFeedbackType; }
 
-#include "NotificationFeedbackType.hpp"
 #include "ImpactFeedbackStyle.hpp"
+#include "NotificationFeedbackType.hpp"
 
 namespace margelo::nitro::haptics {
 
@@ -52,8 +52,8 @@ namespace margelo::nitro::haptics {
 
     public:
       // Methods
-      virtual void notification(NotificationFeedbackType style) = 0;
       virtual void impact(ImpactFeedbackStyle style) = 0;
+      virtual void notification(NotificationFeedbackType type) = 0;
       virtual void selection() = 0;
 
     protected:

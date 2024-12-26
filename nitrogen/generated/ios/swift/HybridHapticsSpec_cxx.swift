@@ -101,9 +101,9 @@ public class HybridHapticsSpec_cxx {
 
   // Methods
   @inline(__always)
-  public func notification(style: Int32) -> bridge.Result_void_ {
+  public func impact(style: Int32) -> bridge.Result_void_ {
     do {
-      try self.__implementation.notification(style: margelo.nitro.haptics.NotificationFeedbackType(rawValue: style)!)
+      try self.__implementation.impact(style: margelo.nitro.haptics.ImpactFeedbackStyle(rawValue: style)!)
       return bridge.create_Result_void_()
     } catch (let __error) {
       let __exceptionPtr = __error.toCpp()
@@ -112,9 +112,9 @@ public class HybridHapticsSpec_cxx {
   }
   
   @inline(__always)
-  public func impact(style: Int32) -> bridge.Result_void_ {
+  public func notification(type: Int32) -> bridge.Result_void_ {
     do {
-      try self.__implementation.impact(style: margelo.nitro.haptics.ImpactFeedbackStyle(rawValue: style)!)
+      try self.__implementation.notification(type: margelo.nitro.haptics.NotificationFeedbackType(rawValue: type)!)
       return bridge.create_Result_void_()
     } catch (let __error) {
       let __exceptionPtr = __error.toCpp()

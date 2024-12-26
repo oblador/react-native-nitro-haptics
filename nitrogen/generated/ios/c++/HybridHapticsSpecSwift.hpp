@@ -12,13 +12,13 @@
 // Forward declaration of `HybridHapticsSpec_cxx` to properly resolve imports.
 namespace NitroHaptics { class HybridHapticsSpec_cxx; }
 
-// Forward declaration of `NotificationFeedbackType` to properly resolve imports.
-namespace margelo::nitro::haptics { enum class NotificationFeedbackType; }
 // Forward declaration of `ImpactFeedbackStyle` to properly resolve imports.
 namespace margelo::nitro::haptics { enum class ImpactFeedbackStyle; }
+// Forward declaration of `NotificationFeedbackType` to properly resolve imports.
+namespace margelo::nitro::haptics { enum class NotificationFeedbackType; }
 
-#include "NotificationFeedbackType.hpp"
 #include "ImpactFeedbackStyle.hpp"
+#include "NotificationFeedbackType.hpp"
 
 #include "NitroHaptics-Swift-Cxx-Umbrella.hpp"
 
@@ -57,14 +57,14 @@ namespace margelo::nitro::haptics {
 
   public:
     // Methods
-    inline void notification(NotificationFeedbackType style) override {
-      auto __result = _swiftPart.notification(static_cast<int>(style));
+    inline void impact(ImpactFeedbackStyle style) override {
+      auto __result = _swiftPart.impact(static_cast<int>(style));
       if (__result.hasError()) [[unlikely]] {
         std::rethrow_exception(__result.error());
       }
     }
-    inline void impact(ImpactFeedbackStyle style) override {
-      auto __result = _swiftPart.impact(static_cast<int>(style));
+    inline void notification(NotificationFeedbackType type) override {
+      auto __result = _swiftPart.notification(static_cast<int>(type));
       if (__result.hasError()) [[unlikely]] {
         std::rethrow_exception(__result.error());
       }

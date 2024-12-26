@@ -43,11 +43,11 @@ abstract class HybridHapticsSpec: HybridObject() {
   // Methods
   @DoNotStrip
   @Keep
-  abstract fun notification(style: NotificationFeedbackType): Unit
+  abstract fun impact(style: ImpactFeedbackStyle): Unit
   
   @DoNotStrip
   @Keep
-  abstract fun impact(style: ImpactFeedbackStyle): Unit
+  abstract fun notification(type: NotificationFeedbackType): Unit
   
   @DoNotStrip
   @Keep

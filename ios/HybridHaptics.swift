@@ -13,35 +13,22 @@ import NitroModules
  * Implement `HybridHapticsSpec` so we can expose this Swift class to JS.
  */
 class HybridHaptics : HybridHapticsSpec {
-  func notification(style: NotificationFeedbackType) throws -> Void {
-    let generator = UINotificationFeedbackGenerator()
-    generator.prepare()
-    generator.notificationOccurred(style.toUINotificationFeedbackType())
-  }
-
   func impact(style: ImpactFeedbackStyle) throws -> Void {
     let generator = UIImpactFeedbackGenerator(style: style.toUIImpactFeedbackType())
     generator.prepare()
     generator.impactOccurred()
   }
 
+  func notification(type: NotificationFeedbackType) throws -> Void {
+    let generator = UINotificationFeedbackGenerator()
+    generator.prepare()
+    generator.notificationOccurred(type.toUINotificationFeedbackType())
+  }
+
   func selection() throws -> Void {
     let generator = UISelectionFeedbackGenerator()
     generator.prepare()
     generator.selectionChanged()
-  }
-}
-
-extension NotificationFeedbackType {
-  func toUINotificationFeedbackType() -> UINotificationFeedbackGenerator.FeedbackType {
-    switch self {
-    case .success:
-      return .success
-    case .warning:
-      return .warning
-    case .error:
-      return .error
-    }
   }
 }
 
@@ -58,6 +45,19 @@ extension ImpactFeedbackStyle {
       return .soft
     case .rigid:
       return .rigid
+    }
+  }
+}
+
+extension NotificationFeedbackType {
+  func toUINotificationFeedbackType() -> UINotificationFeedbackGenerator.FeedbackType {
+    switch self {
+    case .success:
+      return .success
+    case .warning:
+      return .warning
+    case .error:
+      return .error
     }
   }
 }
