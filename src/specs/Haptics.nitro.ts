@@ -22,4 +22,5 @@ export interface Haptics
   impact(style: ImpactFeedbackStyle): void;
   notification(type: NotificationFeedbackType): void;
   selection(): void;
+  impactWithIntensity(style: ImpactFeedbackStyle, intensity: number): void;
 }

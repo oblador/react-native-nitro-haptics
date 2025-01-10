@@ -30,6 +30,18 @@ class HybridHaptics : HybridHapticsSpec {
     generator.prepare()
     generator.selectionChanged()
   }
+
+  // Custom method to allow impact with intensity
+  func impactWithIntensity(style: ImpactFeedbackStyle, intensity: Double) throws -> Void {
+    // Ensure intensity is within the range (0, 1]
+    guard intensity >= 0 && intensity <= 1 else {
+      throw NSError(domain: "HybridHaptics", code: 1, userInfo: [NSLocalizedDescriptionKey: "Intensity must be greater than 0 and less than or equal to 1"])
+    }
+    // Create feedback generator with the appropriate style
+    let generator = UIImpactFeedbackGenerator(style: style.toUIImpactFeedbackType())
+    generator.prepare()
+    generator.impactOccurred(intensity: CGFloat(intensity))
+  }
 }
 
 extension ImpactFeedbackStyle {
