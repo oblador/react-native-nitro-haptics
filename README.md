@@ -71,6 +71,14 @@ Notification haptics provide feedback about the outcome of a task or action, suc
 
 Selection haptics provide feedback while the values of a UI element are changing, see [HIG for visualization](https://developer.apple.com/design/human-interface-guidelines/playing-haptics#Selection).
 
+### `Haptics.impactWithIntensity(style: 'light' | 'medium' | 'heavy' | 'soft' | 'rigid', intensity: number)`
+
+**This function is not supported on Android**
+
+The `impactWithIntensity` provides haptic feedback with a customizable intensity level. This allows to adjust the strength of the haptic feedback based on the needs of the application, offering a more refined and dynamic user experience.
+
+`intensity`: A number between `0.0` and `1` that determines the strength of the haptic feedback, see [Triggers impact feedback with a specific intensity](https://developer.apple.com/documentation/uikit/uiimpactfeedbackgenerator/impactoccurred(intensity:))
+
 ## License
 
 MIT

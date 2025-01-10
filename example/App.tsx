@@ -47,6 +47,10 @@ function App(): React.JSX.Element {
             onPress={() => Haptics.notification('warning')}
           />
           <Button title="Selection" onPress={() => Haptics.selection()} />
+          <Button
+            title="Impact With Intensity"
+            onPress={() => Haptics.impactWithIntensity('light', 0.5)}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>

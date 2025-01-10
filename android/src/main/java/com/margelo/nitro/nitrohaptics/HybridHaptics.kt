@@ -105,6 +105,12 @@ class HybridHaptics: HybridHapticsSpec() {
     vibrate(selectionType)
   }
 
+  @DoNotStrip
+  @Keep
+  override fun impactWithIntensity(style: ImpactFeedbackStyle, intensity: Double): Unit {
+    Log.e("Haptics", "impactWithIntensity is unsupported on Android")
+  }
+
   override val memorySize: Long
     get() = 0L
 
