@@ -8,6 +8,7 @@
 import React from 'react';
 import {
   Button,
+  Platform,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -47,6 +48,12 @@ function App(): React.JSX.Element {
             onPress={() => Haptics.notification('warning')}
           />
           <Button title="Selection" onPress={() => Haptics.selection()} />
+          {Platform.OS === 'android' && (
+            <Button
+              title="Android Haptics"
+              onPress={() => Haptics.performAndroidHaptics('confirm')}
+            />
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>

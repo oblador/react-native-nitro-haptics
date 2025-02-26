@@ -17,6 +17,7 @@ namespace margelo::nitro::haptics {
       prototype.registerHybridMethod("impact", &HybridHapticsSpec::impact);
       prototype.registerHybridMethod("notification", &HybridHapticsSpec::notification);
       prototype.registerHybridMethod("selection", &HybridHapticsSpec::selection);
+      prototype.registerHybridMethod("performAndroidHaptics", &HybridHapticsSpec::performAndroidHaptics);
     });
   }
 

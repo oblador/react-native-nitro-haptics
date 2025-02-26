@@ -17,6 +17,7 @@ public protocol HybridHapticsSpec_protocol: HybridObject {
   func impact(style: ImpactFeedbackStyle) throws -> Void
   func notification(type: NotificationFeedbackType) throws -> Void
   func selection() throws -> Void
+  func performAndroidHaptics(type: AndroidHaptics) throws -> Void
 }
 
 /// See ``HybridHapticsSpec``

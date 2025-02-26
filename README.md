@@ -71,6 +71,10 @@ Notification haptics provide feedback about the outcome of a task or action, suc
 
 Selection haptics provide feedback while the values of a UI element are changing, see [HIG for visualization](https://developer.apple.com/design/human-interface-guidelines/playing-haptics#Selection).
 
+### `Haptics.performAndroidHaptics(type: 'confirm' | 'reject' | 'gesture-start' | 'gesture-end' | 'toggle-on' | 'toggle-off' | 'clock-tick' | 'context-click' | 'drag-start' | 'keyboard-tap' | 'keyboard-press' | 'keyboard-release' | 'long-press' | 'virtual-key' | 'virtual-key-release' | 'no-haptics' | 'segment-tick' | 'segment-frequent-tick' | 'text-handle-move')`
+
+Android equivalent to provide haptic feedback for some built in actions, such as long presses, but you may wish to provide feedback for your own widget, see [`HapticFeedbackConstants`](https://developer.android.com/reference/android/view/HapticFeedbackConstants.html) for uses.
+
 ## License
 
 MIT

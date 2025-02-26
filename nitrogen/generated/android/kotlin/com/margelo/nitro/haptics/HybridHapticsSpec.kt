@@ -51,6 +51,10 @@ abstract class HybridHapticsSpec: HybridObject() {
   @DoNotStrip
   @Keep
   abstract fun selection(): Unit
+  
+  @DoNotStrip
+  @Keep
+  abstract fun performAndroidHaptics(type: AndroidHaptics): Unit
 
   private external fun initHybrid(): HybridData
 

@@ -17,9 +17,12 @@
 namespace margelo::nitro::haptics { enum class ImpactFeedbackStyle; }
 // Forward declaration of `NotificationFeedbackType` to properly resolve imports.
 namespace margelo::nitro::haptics { enum class NotificationFeedbackType; }
+// Forward declaration of `AndroidHaptics` to properly resolve imports.
+namespace margelo::nitro::haptics { enum class AndroidHaptics; }
 
 #include "ImpactFeedbackStyle.hpp"
 #include "NotificationFeedbackType.hpp"
+#include "AndroidHaptics.hpp"
 
 namespace margelo::nitro::haptics {
 
@@ -55,6 +58,7 @@ namespace margelo::nitro::haptics {
       virtual void impact(ImpactFeedbackStyle style) = 0;
       virtual void notification(NotificationFeedbackType type) = 0;
       virtual void selection() = 0;
+      virtual void performAndroidHaptics(AndroidHaptics type) = 0;
 
     protected:
       // Hybrid Setup
