@@ -54,6 +54,7 @@ namespace margelo::nitro::haptics {
     void impact(ImpactFeedbackStyle style) override;
     void notification(NotificationFeedbackType type) override;
     void selection() override;
+    void performAndroidHaptics(AndroidHaptics type) override;
 
   private:
     friend HybridBase;

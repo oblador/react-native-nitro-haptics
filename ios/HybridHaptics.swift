@@ -30,6 +30,10 @@ class HybridHaptics : HybridHapticsSpec {
     generator.prepare()
     generator.selectionChanged()
   }
+
+  func performAndroidHaptics(type: AndroidHaptics) throws -> Void {
+    throw RuntimeError.error(withMessage: "AndroidHaptics not supported outside of Android")
+  }
 }
 
 extension ImpactFeedbackStyle {

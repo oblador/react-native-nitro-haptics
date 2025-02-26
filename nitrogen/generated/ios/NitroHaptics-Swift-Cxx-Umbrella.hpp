@@ -8,6 +8,8 @@
 #pragma once
 
 // Forward declarations of C++ defined types
+// Forward declaration of `AndroidHaptics` to properly resolve imports.
+namespace margelo::nitro::haptics { enum class AndroidHaptics; }
 // Forward declaration of `HybridHapticsSpec` to properly resolve imports.
 namespace margelo::nitro::haptics { class HybridHapticsSpec; }
 // Forward declaration of `ImpactFeedbackStyle` to properly resolve imports.
@@ -16,6 +18,7 @@ namespace margelo::nitro::haptics { enum class ImpactFeedbackStyle; }
 namespace margelo::nitro::haptics { enum class NotificationFeedbackType; }
 
 // Include C++ defined types
+#include "AndroidHaptics.hpp"
 #include "HybridHapticsSpec.hpp"
 #include "ImpactFeedbackStyle.hpp"
 #include "NotificationFeedbackType.hpp"
