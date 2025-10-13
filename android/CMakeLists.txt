@@ -19,6 +19,10 @@ include_directories(
         "../cpp"
 )
 
+#Android 16kb page support
+set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-z,max-page-size=16384")
+
+
 find_library(LOG_LIB log)
 
 # Link all libraries together
