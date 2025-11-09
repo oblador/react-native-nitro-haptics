@@ -15,14 +15,10 @@ import com.facebook.proguard.annotations.DoNotStrip
  */
 @DoNotStrip
 @Keep
-enum class ImpactFeedbackStyle {
-  LIGHT,
-  MEDIUM,
-  HEAVY,
-  SOFT,
-  RIGID;
-
-  @DoNotStrip
-  @Keep
-  private val _ordinal = ordinal
+enum class ImpactFeedbackStyle(@DoNotStrip @Keep val value: Int) {
+  LIGHT(0),
+  MEDIUM(1),
+  HEAVY(2),
+  SOFT(3),
+  RIGID(4);
 }

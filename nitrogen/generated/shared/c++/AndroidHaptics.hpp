@@ -54,58 +54,56 @@ namespace margelo::nitro::haptics {
 
 namespace margelo::nitro {
 
-  using namespace margelo::nitro::haptics;
-
   // C++ AndroidHaptics <> JS AndroidHaptics (union)
   template <>
-  struct JSIConverter<AndroidHaptics> final {
-    static inline AndroidHaptics fromJSI(jsi::Runtime& runtime, const jsi::Value& arg) {
+  struct JSIConverter<margelo::nitro::haptics::AndroidHaptics> final {
+    static inline margelo::nitro::haptics::AndroidHaptics fromJSI(jsi::Runtime& runtime, const jsi::Value& arg) {
       std::string unionValue = JSIConverter<std::string>::fromJSI(runtime, arg);
       switch (hashString(unionValue.c_str(), unionValue.size())) {
-        case hashString("confirm"): return AndroidHaptics::CONFIRM;
-        case hashString("reject"): return AndroidHaptics::REJECT;
-        case hashString("gesture-start"): return AndroidHaptics::GESTURE_START;
-        case hashString("gesture-end"): return AndroidHaptics::GESTURE_END;
-        case hashString("toggle-on"): return AndroidHaptics::TOGGLE_ON;
-        case hashString("toggle-off"): return AndroidHaptics::TOGGLE_OFF;
-        case hashString("clock-tick"): return AndroidHaptics::CLOCK_TICK;
-        case hashString("context-click"): return AndroidHaptics::CONTEXT_CLICK;
-        case hashString("drag-start"): return AndroidHaptics::DRAG_START;
-        case hashString("keyboard-tap"): return AndroidHaptics::KEYBOARD_TAP;
-        case hashString("keyboard-press"): return AndroidHaptics::KEYBOARD_PRESS;
-        case hashString("keyboard-release"): return AndroidHaptics::KEYBOARD_RELEASE;
-        case hashString("long-press"): return AndroidHaptics::LONG_PRESS;
-        case hashString("virtual-key"): return AndroidHaptics::VIRTUAL_KEY;
-        case hashString("virtual-key-release"): return AndroidHaptics::VIRTUAL_KEY_RELEASE;
-        case hashString("no-haptics"): return AndroidHaptics::NO_HAPTICS;
-        case hashString("segment-tick"): return AndroidHaptics::SEGMENT_TICK;
-        case hashString("segment-frequent-tick"): return AndroidHaptics::SEGMENT_FREQUENT_TICK;
-        case hashString("text-handle-move"): return AndroidHaptics::TEXT_HANDLE_MOVE;
+        case hashString("confirm"): return margelo::nitro::haptics::AndroidHaptics::CONFIRM;
+        case hashString("reject"): return margelo::nitro::haptics::AndroidHaptics::REJECT;
+        case hashString("gesture-start"): return margelo::nitro::haptics::AndroidHaptics::GESTURE_START;
+        case hashString("gesture-end"): return margelo::nitro::haptics::AndroidHaptics::GESTURE_END;
+        case hashString("toggle-on"): return margelo::nitro::haptics::AndroidHaptics::TOGGLE_ON;
+        case hashString("toggle-off"): return margelo::nitro::haptics::AndroidHaptics::TOGGLE_OFF;
+        case hashString("clock-tick"): return margelo::nitro::haptics::AndroidHaptics::CLOCK_TICK;
+        case hashString("context-click"): return margelo::nitro::haptics::AndroidHaptics::CONTEXT_CLICK;
+        case hashString("drag-start"): return margelo::nitro::haptics::AndroidHaptics::DRAG_START;
+        case hashString("keyboard-tap"): return margelo::nitro::haptics::AndroidHaptics::KEYBOARD_TAP;
+        case hashString("keyboard-press"): return margelo::nitro::haptics::AndroidHaptics::KEYBOARD_PRESS;
+        case hashString("keyboard-release"): return margelo::nitro::haptics::AndroidHaptics::KEYBOARD_RELEASE;
+        case hashString("long-press"): return margelo::nitro::haptics::AndroidHaptics::LONG_PRESS;
+        case hashString("virtual-key"): return margelo::nitro::haptics::AndroidHaptics::VIRTUAL_KEY;
+        case hashString("virtual-key-release"): return margelo::nitro::haptics::AndroidHaptics::VIRTUAL_KEY_RELEASE;
+        case hashString("no-haptics"): return margelo::nitro::haptics::AndroidHaptics::NO_HAPTICS;
+        case hashString("segment-tick"): return margelo::nitro::haptics::AndroidHaptics::SEGMENT_TICK;
+        case hashString("segment-frequent-tick"): return margelo::nitro::haptics::AndroidHaptics::SEGMENT_FREQUENT_TICK;
+        case hashString("text-handle-move"): return margelo::nitro::haptics::AndroidHaptics::TEXT_HANDLE_MOVE;
         default: [[unlikely]]
           throw std::invalid_argument("Cannot convert \"" + unionValue + "\" to enum AndroidHaptics - invalid value!");
       }
     }
-    static inline jsi::Value toJSI(jsi::Runtime& runtime, AndroidHaptics arg) {
+    static inline jsi::Value toJSI(jsi::Runtime& runtime, margelo::nitro::haptics::AndroidHaptics arg) {
       switch (arg) {
-        case AndroidHaptics::CONFIRM: return JSIConverter<std::string>::toJSI(runtime, "confirm");
-        case AndroidHaptics::REJECT: return JSIConverter<std::string>::toJSI(runtime, "reject");
-        case AndroidHaptics::GESTURE_START: return JSIConverter<std::string>::toJSI(runtime, "gesture-start");
-        case AndroidHaptics::GESTURE_END: return JSIConverter<std::string>::toJSI(runtime, "gesture-end");
-        case AndroidHaptics::TOGGLE_ON: return JSIConverter<std::string>::toJSI(runtime, "toggle-on");
-        case AndroidHaptics::TOGGLE_OFF: return JSIConverter<std::string>::toJSI(runtime, "toggle-off");
-        case AndroidHaptics::CLOCK_TICK: return JSIConverter<std::string>::toJSI(runtime, "clock-tick");
-        case AndroidHaptics::CONTEXT_CLICK: return JSIConverter<std::string>::toJSI(runtime, "context-click");
-        case AndroidHaptics::DRAG_START: return JSIConverter<std::string>::toJSI(runtime, "drag-start");
-        case AndroidHaptics::KEYBOARD_TAP: return JSIConverter<std::string>::toJSI(runtime, "keyboard-tap");
-        case AndroidHaptics::KEYBOARD_PRESS: return JSIConverter<std::string>::toJSI(runtime, "keyboard-press");
-        case AndroidHaptics::KEYBOARD_RELEASE: return JSIConverter<std::string>::toJSI(runtime, "keyboard-release");
-        case AndroidHaptics::LONG_PRESS: return JSIConverter<std::string>::toJSI(runtime, "long-press");
-        case AndroidHaptics::VIRTUAL_KEY: return JSIConverter<std::string>::toJSI(runtime, "virtual-key");
-        case AndroidHaptics::VIRTUAL_KEY_RELEASE: return JSIConverter<std::string>::toJSI(runtime, "virtual-key-release");
-        case AndroidHaptics::NO_HAPTICS: return JSIConverter<std::string>::toJSI(runtime, "no-haptics");
-        case AndroidHaptics::SEGMENT_TICK: return JSIConverter<std::string>::toJSI(runtime, "segment-tick");
-        case AndroidHaptics::SEGMENT_FREQUENT_TICK: return JSIConverter<std::string>::toJSI(runtime, "segment-frequent-tick");
-        case AndroidHaptics::TEXT_HANDLE_MOVE: return JSIConverter<std::string>::toJSI(runtime, "text-handle-move");
+        case margelo::nitro::haptics::AndroidHaptics::CONFIRM: return JSIConverter<std::string>::toJSI(runtime, "confirm");
+        case margelo::nitro::haptics::AndroidHaptics::REJECT: return JSIConverter<std::string>::toJSI(runtime, "reject");
+        case margelo::nitro::haptics::AndroidHaptics::GESTURE_START: return JSIConverter<std::string>::toJSI(runtime, "gesture-start");
+        case margelo::nitro::haptics::AndroidHaptics::GESTURE_END: return JSIConverter<std::string>::toJSI(runtime, "gesture-end");
+        case margelo::nitro::haptics::AndroidHaptics::TOGGLE_ON: return JSIConverter<std::string>::toJSI(runtime, "toggle-on");
+        case margelo::nitro::haptics::AndroidHaptics::TOGGLE_OFF: return JSIConverter<std::string>::toJSI(runtime, "toggle-off");
+        case margelo::nitro::haptics::AndroidHaptics::CLOCK_TICK: return JSIConverter<std::string>::toJSI(runtime, "clock-tick");
+        case margelo::nitro::haptics::AndroidHaptics::CONTEXT_CLICK: return JSIConverter<std::string>::toJSI(runtime, "context-click");
+        case margelo::nitro::haptics::AndroidHaptics::DRAG_START: return JSIConverter<std::string>::toJSI(runtime, "drag-start");
+        case margelo::nitro::haptics::AndroidHaptics::KEYBOARD_TAP: return JSIConverter<std::string>::toJSI(runtime, "keyboard-tap");
+        case margelo::nitro::haptics::AndroidHaptics::KEYBOARD_PRESS: return JSIConverter<std::string>::toJSI(runtime, "keyboard-press");
+        case margelo::nitro::haptics::AndroidHaptics::KEYBOARD_RELEASE: return JSIConverter<std::string>::toJSI(runtime, "keyboard-release");
+        case margelo::nitro::haptics::AndroidHaptics::LONG_PRESS: return JSIConverter<std::string>::toJSI(runtime, "long-press");
+        case margelo::nitro::haptics::AndroidHaptics::VIRTUAL_KEY: return JSIConverter<std::string>::toJSI(runtime, "virtual-key");
+        case margelo::nitro::haptics::AndroidHaptics::VIRTUAL_KEY_RELEASE: return JSIConverter<std::string>::toJSI(runtime, "virtual-key-release");
+        case margelo::nitro::haptics::AndroidHaptics::NO_HAPTICS: return JSIConverter<std::string>::toJSI(runtime, "no-haptics");
+        case margelo::nitro::haptics::AndroidHaptics::SEGMENT_TICK: return JSIConverter<std::string>::toJSI(runtime, "segment-tick");
+        case margelo::nitro::haptics::AndroidHaptics::SEGMENT_FREQUENT_TICK: return JSIConverter<std::string>::toJSI(runtime, "segment-frequent-tick");
+        case margelo::nitro::haptics::AndroidHaptics::TEXT_HANDLE_MOVE: return JSIConverter<std::string>::toJSI(runtime, "text-handle-move");
         default: [[unlikely]]
           throw std::invalid_argument("Cannot convert AndroidHaptics to JS - invalid value: "
                                     + std::to_string(static_cast<int>(arg)) + "!");

@@ -1,0 +1,102 @@
+name: Build iOS
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - '.github/workflows/ios-build.yml'
+      - 'example/ios/**'
+      - 'example/Gemfile'
+      - 'example/Gemfile.lock'
+      - '**/nitrogen/generated/shared/**'
+      - '**/nitrogen/generated/ios/**'
+      - 'cpp/**'
+      - 'ios/**'
+      - '**/Podfile.lock'
+      - '**/package-lock.json'
+      - '**/*.podspec'
+      - '**/react-native.config.js'
+      - '**/nitro.json'
+  pull_request:
+    paths:
+      - '.github/workflows/ios-build.yml'
+      - 'example/ios/**'
+      - 'example/Gemfile'
+      - 'example/Gemfile.lock'
+      - '**/nitrogen/generated/shared/**'
+      - '**/nitrogen/generated/ios/**'
+      - 'cpp/**'
+      - 'ios/**'
+      - '**/Podfile.lock'
+      - '**/package-lock.json'
+      - '**/*.podspec'
+      - '**/react-native.config.js'
+      - '**/nitro.json'
+  workflow_dispatch:
+
+env:
+  USE_CCACHE: 1
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build iOS Example App
+    runs-on: macOS-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: 16.4
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Setup Ruby (bundle)
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+          working-directory: example/ios
+
+      - name: Install xcpretty
+        run: gem install xcpretty
+
+      - name: Cache CocoaPods
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cocoapods/repos
+            example/ios/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('example/ios/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
+
+      - name: Install Pods
+        working-directory: example/ios
+        run: pod install
+
+      - name: Build App
+        working-directory: example/ios
+        run: |
+          set -o pipefail && xcodebuild \
+            CC=clang CPLUSPLUS=clang++ LD=clang LDPLUSPLUS=clang++ \
+            -derivedDataPath build -UseModernBuildSystem=YES \
+            -workspace HapticsExample.xcworkspace \
+            -scheme HapticsExample \
+            -sdk iphonesimulator \
+            -configuration Debug \
+            -destination 'platform=iOS Simulator,name=iPhone 16' \
+            build \
+            CODE_SIGNING_ALLOWED=NO | xcpretty

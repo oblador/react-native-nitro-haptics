@@ -13,18 +13,18 @@
 
 namespace margelo::nitro::haptics::bridge::swift {
 
-  // pragma MARK: std::shared_ptr<margelo::nitro::haptics::HybridHapticsSpec>
-  std::shared_ptr<margelo::nitro::haptics::HybridHapticsSpec> create_std__shared_ptr_margelo__nitro__haptics__HybridHapticsSpec_(void* _Nonnull swiftUnsafePointer) {
+  // pragma MARK: std::shared_ptr<HybridHapticsSpec>
+  std::shared_ptr<HybridHapticsSpec> create_std__shared_ptr_HybridHapticsSpec_(void* NON_NULL swiftUnsafePointer) noexcept {
     NitroHaptics::HybridHapticsSpec_cxx swiftPart = NitroHaptics::HybridHapticsSpec_cxx::fromUnsafe(swiftUnsafePointer);
     return std::make_shared<margelo::nitro::haptics::HybridHapticsSpecSwift>(swiftPart);
   }
-  void* _Nonnull get_std__shared_ptr_margelo__nitro__haptics__HybridHapticsSpec_(std__shared_ptr_margelo__nitro__haptics__HybridHapticsSpec_ cppType) {
+  void* NON_NULL get_std__shared_ptr_HybridHapticsSpec_(std__shared_ptr_HybridHapticsSpec_ cppType) {
     std::shared_ptr<margelo::nitro::haptics::HybridHapticsSpecSwift> swiftWrapper = std::dynamic_pointer_cast<margelo::nitro::haptics::HybridHapticsSpecSwift>(cppType);
-  #ifdef NITRO_DEBUG
+    #ifdef NITRO_DEBUG
     if (swiftWrapper == nullptr) [[unlikely]] {
       throw std::runtime_error("Class \"HybridHapticsSpec\" is not implemented in Swift!");
     }
-  #endif
+    #endif
     NitroHaptics::HybridHapticsSpec_cxx& swiftPart = swiftWrapper->getSwiftPart();
     return swiftPart.toUnsafe();
   }

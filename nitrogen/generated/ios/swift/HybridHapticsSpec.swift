@@ -20,9 +20,17 @@ public protocol HybridHapticsSpec_protocol: HybridObject {
   func performAndroidHaptics(type: AndroidHaptics) throws -> Void
 }
 
+public extension HybridHapticsSpec_protocol {
+  /// Default implementation of ``HybridObject.toString``
+  func toString() -> String {
+    return "[HybridObject Haptics]"
+  }
+}
+
 /// See ``HybridHapticsSpec``
-public class HybridHapticsSpec_base {
+open class HybridHapticsSpec_base {
   private weak var cxxWrapper: HybridHapticsSpec_cxx? = nil
+  public init() { }
   public func getCxxWrapper() -> HybridHapticsSpec_cxx {
   #if DEBUG
     guard self is HybridHapticsSpec else {

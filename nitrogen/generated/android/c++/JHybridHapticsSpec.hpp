@@ -29,6 +29,7 @@ namespace margelo::nitro::haptics {
     // C++ constructor (called from Java via `initHybrid()`)
     explicit JHybridHapticsSpec(jni::alias_ref<jhybridobject> jThis) :
       HybridObject(HybridHapticsSpec::TAG),
+      HybridBase(jThis),
       _javaPart(jni::make_global(jThis)) {}
 
   public:
@@ -39,6 +40,8 @@ namespace margelo::nitro::haptics {
 
   public:
     size_t getExternalMemorySize() noexcept override;
+    void dispose() noexcept override;
+    std::string toString() override;
 
   public:
     inline const jni::global_ref<JHybridHapticsSpec::javaobject>& getJavaPart() const noexcept {

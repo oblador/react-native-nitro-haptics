@@ -2,17 +2,35 @@
   "name": "react-native-nitro-haptics",
   "version": "0.1.0",
   "description": "Low Latency Haptic Feedback with Worklet Support for React Native",
-  "main": "lib/index",
-  "module": "lib/index",
-  "types": "lib/index.d.ts",
+  "main": "./lib/commonjs/index.js",
+  "module": "./lib/module/index.js",
+  "types": "./lib/typescript/src/index.d.ts",
   "react-native": "src/index",
   "source": "src/index",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint \"**/*.{js,ts,tsx}\" --fix",
+    "lint-ci": "eslint \"**/*.{js,ts,tsx}\" -f @jamesacarr/github-actions",
+    "clean": "git clean -dfX",
+    "build": "npm run typecheck && bob build",
+    "codegen": "nitrogen --logLevel=\"debug\" && npm run build && node post-script.js"
+  },
+  "keywords": [
+    "react-native",
+    "nitro",
+    "nitro-module",
+    "haptics",
+    "haptic-feedback"
+  ],
   "files": [
     "src",
     "react-native.config.js",
     "lib",
     "nitrogen",
+    "cpp",
+    "nitro.json",
     "android/build.gradle",
+    "android/fix-prefab.gradle",
     "android/gradle.properties",
     "android/CMakeLists.txt",
     "android/src",
@@ -25,52 +43,32 @@
     "*.podspec",
     "README.md"
   ],
-  "scripts": {
-    "postinstall": "tsc || exit 0;",
-    "example": "npm run -w example",
-    "typecheck": "tsc --noEmit",
-    "clean": "rm -rf android/build node_modules/**/android/build lib",
-    "lint": "eslint \"**/*.{js,ts,tsx}\" --fix",
-    "lint-ci": "eslint \"**/*.{js,ts,tsx}\" -f @jamesacarr/github-actions",
-    "build": "tsc && nitro-codegen --logLevel=\"debug\""
-  },
   "workspaces": [
     "example"
   ],
-  "keywords": [
-    "react-native",
-    "nitro",
-    "nitro-module",
-    "haptics",
-    "haptic-feedback"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/oblador/react-native-nitro-haptics.git"
-  },
-  "author": "Joel Arvidsson <joel@oblador.se> (https://github.com/oblador)",
+  "repository": "https://github.com/oblador/react-native-nitro-haptics.git",
+  "author": "Joel Arvidsson",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/oblador/react-native-nitro-haptics/issues"
-  },
+  "bugs": "https://github.com/oblador/react-native-nitro-haptics/issues",
   "homepage": "https://github.com/oblador/react-native-nitro-haptics#readme",
   "publishConfig": {
+    "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
     "@jamesacarr/eslint-formatter-github-actions": "^0.2.0",
-    "@react-native/eslint-config": "0.78.0",
-    "@types/jest": "^29.5.13",
-    "@types/react": "^19.0.0",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.2.1",
-    "nitro-codegen": "0.24.1",
+    "@types/jest": "^29.5.12",
+    "@types/react": "19.1.1",
+    "conventional-changelog-conventionalcommits": "^9.1.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "nitrogen": "0.31.5",
     "prettier": "^3.3.3",
-    "react": "19.0.0",
-    "react-native": "0.78.0",
-    "react-native-nitro-modules": "0.24.1",
-    "typescript": "^5.5.4"
+    "react": "19.1.1",
+    "react-native": "0.82",
+    "react-native-builder-bob": "^0.37.0",
+    "react-native-nitro-modules": "0.31.5",
+    "typescript": "^5.8.3"
   },
   "peerDependencies": {
     "react": "*",
@@ -109,5 +107,19 @@
     "tabWidth": 2,
     "trailingComma": "all",
     "useTabs": false
+  },
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      "commonjs",
+      "module",
+      [
+        "typescript",
+        {
+          "project": "tsconfig.json"
+        }
+      ]
+    ]
   }
 }

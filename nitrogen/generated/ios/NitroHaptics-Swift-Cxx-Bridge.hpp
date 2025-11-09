@@ -27,24 +27,24 @@ namespace NitroHaptics { class HybridHapticsSpec_cxx; }
  */
 namespace margelo::nitro::haptics::bridge::swift {
 
-  // pragma MARK: std::shared_ptr<margelo::nitro::haptics::HybridHapticsSpec>
+  // pragma MARK: std::shared_ptr<HybridHapticsSpec>
   /**
-   * Specialized version of `std::shared_ptr<margelo::nitro::haptics::HybridHapticsSpec>`.
+   * Specialized version of `std::shared_ptr<HybridHapticsSpec>`.
    */
-  using std__shared_ptr_margelo__nitro__haptics__HybridHapticsSpec_ = std::shared_ptr<margelo::nitro::haptics::HybridHapticsSpec>;
-  std::shared_ptr<margelo::nitro::haptics::HybridHapticsSpec> create_std__shared_ptr_margelo__nitro__haptics__HybridHapticsSpec_(void* _Nonnull swiftUnsafePointer);
-  void* _Nonnull get_std__shared_ptr_margelo__nitro__haptics__HybridHapticsSpec_(std__shared_ptr_margelo__nitro__haptics__HybridHapticsSpec_ cppType);
+  using std__shared_ptr_HybridHapticsSpec_ = std::shared_ptr<HybridHapticsSpec>;
+  std::shared_ptr<HybridHapticsSpec> create_std__shared_ptr_HybridHapticsSpec_(void* NON_NULL swiftUnsafePointer) noexcept;
+  void* NON_NULL get_std__shared_ptr_HybridHapticsSpec_(std__shared_ptr_HybridHapticsSpec_ cppType);
   
-  // pragma MARK: std::weak_ptr<margelo::nitro::haptics::HybridHapticsSpec>
-  using std__weak_ptr_margelo__nitro__haptics__HybridHapticsSpec_ = std::weak_ptr<margelo::nitro::haptics::HybridHapticsSpec>;
-  inline std__weak_ptr_margelo__nitro__haptics__HybridHapticsSpec_ weakify_std__shared_ptr_margelo__nitro__haptics__HybridHapticsSpec_(const std::shared_ptr<margelo::nitro::haptics::HybridHapticsSpec>& strong) { return strong; }
+  // pragma MARK: std::weak_ptr<HybridHapticsSpec>
+  using std__weak_ptr_HybridHapticsSpec_ = std::weak_ptr<HybridHapticsSpec>;
+  inline std__weak_ptr_HybridHapticsSpec_ weakify_std__shared_ptr_HybridHapticsSpec_(const std::shared_ptr<HybridHapticsSpec>& strong) noexcept { return strong; }
   
   // pragma MARK: Result<void>
   using Result_void_ = Result<void>;
-  inline Result_void_ create_Result_void_() {
+  inline Result_void_ create_Result_void_() noexcept {
     return Result<void>::withValue();
   }
-  inline Result_void_ create_Result_void_(const std::exception_ptr& error) {
+  inline Result_void_ create_Result_void_(const std::exception_ptr& error) noexcept {
     return Result<void>::withError(error);
   }
 

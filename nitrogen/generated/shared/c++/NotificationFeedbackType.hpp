@@ -38,26 +38,24 @@ namespace margelo::nitro::haptics {
 
 namespace margelo::nitro {
 
-  using namespace margelo::nitro::haptics;
-
   // C++ NotificationFeedbackType <> JS NotificationFeedbackType (union)
   template <>
-  struct JSIConverter<NotificationFeedbackType> final {
-    static inline NotificationFeedbackType fromJSI(jsi::Runtime& runtime, const jsi::Value& arg) {
+  struct JSIConverter<margelo::nitro::haptics::NotificationFeedbackType> final {
+    static inline margelo::nitro::haptics::NotificationFeedbackType fromJSI(jsi::Runtime& runtime, const jsi::Value& arg) {
       std::string unionValue = JSIConverter<std::string>::fromJSI(runtime, arg);
       switch (hashString(unionValue.c_str(), unionValue.size())) {
-        case hashString("success"): return NotificationFeedbackType::SUCCESS;
-        case hashString("warning"): return NotificationFeedbackType::WARNING;
-        case hashString("error"): return NotificationFeedbackType::ERROR;
+        case hashString("success"): return margelo::nitro::haptics::NotificationFeedbackType::SUCCESS;
+        case hashString("warning"): return margelo::nitro::haptics::NotificationFeedbackType::WARNING;
+        case hashString("error"): return margelo::nitro::haptics::NotificationFeedbackType::ERROR;
         default: [[unlikely]]
           throw std::invalid_argument("Cannot convert \"" + unionValue + "\" to enum NotificationFeedbackType - invalid value!");
       }
     }
-    static inline jsi::Value toJSI(jsi::Runtime& runtime, NotificationFeedbackType arg) {
+    static inline jsi::Value toJSI(jsi::Runtime& runtime, margelo::nitro::haptics::NotificationFeedbackType arg) {
       switch (arg) {
-        case NotificationFeedbackType::SUCCESS: return JSIConverter<std::string>::toJSI(runtime, "success");
-        case NotificationFeedbackType::WARNING: return JSIConverter<std::string>::toJSI(runtime, "warning");
-        case NotificationFeedbackType::ERROR: return JSIConverter<std::string>::toJSI(runtime, "error");
+        case margelo::nitro::haptics::NotificationFeedbackType::SUCCESS: return JSIConverter<std::string>::toJSI(runtime, "success");
+        case margelo::nitro::haptics::NotificationFeedbackType::WARNING: return JSIConverter<std::string>::toJSI(runtime, "warning");
+        case margelo::nitro::haptics::NotificationFeedbackType::ERROR: return JSIConverter<std::string>::toJSI(runtime, "error");
         default: [[unlikely]]
           throw std::invalid_argument("Cannot convert NotificationFeedbackType to JS - invalid value: "
                                     + std::to_string(static_cast<int>(arg)) + "!");
