@@ -10,7 +10,7 @@ package com.margelo.nitro.haptics
 import androidx.annotation.Keep
 import com.facebook.jni.HybridData
 import com.facebook.proguard.annotations.DoNotStrip
-import com.margelo.nitro.core.*
+import com.margelo.nitro.core.HybridObject
 
 /**
  * A Kotlin class representing the Haptics HybridObject.
@@ -36,6 +36,11 @@ abstract class HybridHapticsSpec: HybridObject() {
     super.updateNative(hybridData)
   }
 
+  // Default implementation of `HybridObject.toString()`
+  override fun toString(): String {
+    return "[HybridObject Haptics]"
+  }
+
   // Properties
   
 
@@ -59,6 +64,6 @@ abstract class HybridHapticsSpec: HybridObject() {
   private external fun initHybrid(): HybridData
 
   companion object {
-    private const val TAG = "HybridHapticsSpec"
+    protected const val TAG = "HybridHapticsSpec"
   }
 }

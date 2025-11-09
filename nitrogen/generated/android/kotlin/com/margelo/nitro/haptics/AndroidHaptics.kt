@@ -15,28 +15,24 @@ import com.facebook.proguard.annotations.DoNotStrip
  */
 @DoNotStrip
 @Keep
-enum class AndroidHaptics {
-  CONFIRM,
-  REJECT,
-  GESTURE_START,
-  GESTURE_END,
-  TOGGLE_ON,
-  TOGGLE_OFF,
-  CLOCK_TICK,
-  CONTEXT_CLICK,
-  DRAG_START,
-  KEYBOARD_TAP,
-  KEYBOARD_PRESS,
-  KEYBOARD_RELEASE,
-  LONG_PRESS,
-  VIRTUAL_KEY,
-  VIRTUAL_KEY_RELEASE,
-  NO_HAPTICS,
-  SEGMENT_TICK,
-  SEGMENT_FREQUENT_TICK,
-  TEXT_HANDLE_MOVE;
-
-  @DoNotStrip
-  @Keep
-  private val _ordinal = ordinal
+enum class AndroidHaptics(@DoNotStrip @Keep val value: Int) {
+  CONFIRM(0),
+  REJECT(1),
+  GESTURE_START(2),
+  GESTURE_END(3),
+  TOGGLE_ON(4),
+  TOGGLE_OFF(5),
+  CLOCK_TICK(6),
+  CONTEXT_CLICK(7),
+  DRAG_START(8),
+  KEYBOARD_TAP(9),
+  KEYBOARD_PRESS(10),
+  KEYBOARD_RELEASE(11),
+  LONG_PRESS(12),
+  VIRTUAL_KEY(13),
+  VIRTUAL_KEY_RELEASE(14),
+  NO_HAPTICS(15),
+  SEGMENT_TICK(16),
+  SEGMENT_FREQUENT_TICK(17),
+  TEXT_HANDLE_MOVE(18);
 }

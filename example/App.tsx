@@ -6,57 +6,26 @@
  */
 
 import React from 'react';
-import {
-  Button,
-  Platform,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  useColorScheme,
-  View,
-} from 'react-native';
+import { Button, Platform, ScrollView } from 'react-native';
 
-import { Colors, Header } from 'react-native/Libraries/NewAppScreen';
 import { Haptics } from 'react-native-nitro-haptics';
 
 function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
+    <ScrollView contentInsetAdjustmentBehavior="automatic">
+      <Button title="Impact" onPress={() => Haptics.impact('medium')} />
+      <Button
+        title="Notification"
+        onPress={() => Haptics.notification('warning')}
       />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}
-      >
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}
-        >
-          <Button title="Impact" onPress={() => Haptics.impact('medium')} />
-          <Button
-            title="Notification"
-            onPress={() => Haptics.notification('warning')}
-          />
-          <Button title="Selection" onPress={() => Haptics.selection()} />
-          {Platform.OS === 'android' && (
-            <Button
-              title="Android Haptics"
-              onPress={() => Haptics.performAndroidHaptics('confirm')}
-            />
-          )}
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+      <Button title="Selection" onPress={() => Haptics.selection()} />
+      {Platform.OS === 'android' && (
+        <Button
+          title="Android Haptics"
+          onPress={() => Haptics.performAndroidHaptics('confirm')}
+        />
+      )}
+    </ScrollView>
   );
 }
 

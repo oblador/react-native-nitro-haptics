@@ -15,12 +15,8 @@ import com.facebook.proguard.annotations.DoNotStrip
  */
 @DoNotStrip
 @Keep
-enum class NotificationFeedbackType {
-  SUCCESS,
-  WARNING,
-  ERROR;
-
-  @DoNotStrip
-  @Keep
-  private val _ordinal = ordinal
+enum class NotificationFeedbackType(@DoNotStrip @Keep val value: Int) {
+  SUCCESS(0),
+  WARNING(1),
+  ERROR(2);
 }

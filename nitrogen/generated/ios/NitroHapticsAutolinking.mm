@@ -24,7 +24,7 @@
   HybridObjectRegistry::registerHybridObjectConstructor(
     "Haptics",
     []() -> std::shared_ptr<HybridObject> {
-      std::shared_ptr<margelo::nitro::haptics::HybridHapticsSpec> hybridObject = NitroHaptics::NitroHapticsAutolinking::createHaptics();
+      std::shared_ptr<HybridHapticsSpec> hybridObject = NitroHaptics::NitroHapticsAutolinking::createHaptics();
       return hybridObject;
     }
   );

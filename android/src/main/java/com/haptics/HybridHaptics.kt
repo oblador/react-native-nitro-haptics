@@ -1,5 +1,6 @@
-package com.margelo.nitro.haptics
+package com.haptics
 
+import com.margelo.nitro.haptics.HybridHapticsSpec
 import android.content.Context
 import android.os.Build
 import android.os.VibrationEffect
@@ -12,9 +13,9 @@ import android.view.View
 import android.view.HapticFeedbackConstants
 import androidx.annotation.Keep
 import com.facebook.proguard.annotations.DoNotStrip
+import com.haptics.HapticsVibrationType
 import com.margelo.nitro.NitroModules
 import com.margelo.nitro.haptics.AndroidHaptics
-import com.margelo.nitro.haptics.HapticsVibrationType
 import com.margelo.nitro.haptics.ImpactFeedbackStyle
 import com.margelo.nitro.haptics.NotificationFeedbackType
 

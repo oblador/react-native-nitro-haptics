@@ -16,7 +16,6 @@
 #include <NitroModules/HybridObjectRegistry.hpp>
 
 #include "JHybridHapticsSpec.hpp"
-#include <NitroModules/JNISharedPtr.hpp>
 #include <NitroModules/DefaultConstructableObject.hpp>
 
 namespace margelo::nitro::haptics {
@@ -34,10 +33,9 @@ int initialize(JavaVM* vm) {
     HybridObjectRegistry::registerHybridObjectConstructor(
       "Haptics",
       []() -> std::shared_ptr<HybridObject> {
-        static DefaultConstructableObject<JHybridHapticsSpec::javaobject> object("com/margelo/nitro/haptics/HybridHaptics");
+        static DefaultConstructableObject<JHybridHapticsSpec::javaobject> object("com/haptics/HybridHaptics");
         auto instance = object.create();
-        auto globalRef = jni::make_global(instance);
-        return JNISharedPtr::make_shared_from_jni<JHybridHapticsSpec>(globalRef);
+        return instance->cthis()->shared();
       }
     );
   });
