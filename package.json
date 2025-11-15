@@ -8,6 +8,7 @@
   "react-native": "src/index",
   "source": "src/index",
   "scripts": {
+    "prepare": "bob build",
     "typecheck": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\" --fix",
     "lint-ci": "eslint \"**/*.{js,ts,tsx}\" -f @jamesacarr/github-actions",
