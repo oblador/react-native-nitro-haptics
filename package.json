@@ -1,6 +1,6 @@
 {
   "name": "react-native-nitro-haptics",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Low Latency Haptic Feedback with Worklet Support for React Native",
   "main": "./lib/commonjs/index.js",
   "module": "./lib/module/index.js",
