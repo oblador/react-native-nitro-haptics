@@ -24,44 +24,41 @@ import com.margelo.nitro.core.HybridObject
   "LocalVariableName", "PropertyName", "PrivatePropertyName", "FunctionName"
 )
 abstract class HybridHapticsSpec: HybridObject() {
+  // Properties
+
+
+  // Methods
   @DoNotStrip
-  private var mHybridData: HybridData = initHybrid()
+  @Keep
+  abstract fun impact(style: ImpactFeedbackStyle): Unit
 
-  init {
-    super.updateNative(mHybridData)
-  }
+  @DoNotStrip
+  @Keep
+  abstract fun notification(type: NotificationFeedbackType): Unit
 
-  override fun updateNative(hybridData: HybridData) {
-    mHybridData = hybridData
-    super.updateNative(hybridData)
-  }
+  @DoNotStrip
+  @Keep
+  abstract fun selection(): Unit
+
+  @DoNotStrip
+  @Keep
+  abstract fun performAndroidHaptics(type: AndroidHaptics): Unit
 
   // Default implementation of `HybridObject.toString()`
   override fun toString(): String {
     return "[HybridObject Haptics]"
   }
 
-  // Properties
-  
-
-  // Methods
+  // C++ backing class
   @DoNotStrip
   @Keep
-  abstract fun impact(style: ImpactFeedbackStyle): Unit
-  
-  @DoNotStrip
-  @Keep
-  abstract fun notification(type: NotificationFeedbackType): Unit
-  
-  @DoNotStrip
-  @Keep
-  abstract fun selection(): Unit
-  
-  @DoNotStrip
-  @Keep
-  abstract fun performAndroidHaptics(type: AndroidHaptics): Unit
-
-  private external fun initHybrid(): HybridData
+  protected open class CxxPart(javaPart: HybridHapticsSpec): HybridObject.CxxPart(javaPart) {
+    // C++ JHybridHapticsSpec::CxxPart::initHybrid(...)
+    external override fun initHybrid(): HybridData
+  }
+  override fun createCxxPart(): CxxPart {
+    return CxxPart(this)
+  }
 
   companion object {
     protected const val TAG = "HybridHapticsSpec"

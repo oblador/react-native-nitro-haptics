@@ -18,39 +18,39 @@ namespace margelo::nitro::haptics {
 
   using namespace facebook;
 
-  class JHybridHapticsSpec: public jni::HybridClass<JHybridHapticsSpec, JHybridObject>,
-                            public virtual HybridHapticsSpec {
+  class JHybridHapticsSpec: public virtual HybridHapticsSpec, public virtual JHybridObject {
   public:
-    static auto constexpr kJavaDescriptor = "Lcom/margelo/nitro/haptics/HybridHapticsSpec;";
-    static jni::local_ref<jhybriddata> initHybrid(jni::alias_ref<jhybridobject> jThis);
-    static void registerNatives();
+    struct JavaPart: public jni::JavaClass<JavaPart, JHybridObject::JavaPart> {
+      static auto constexpr kJavaDescriptor = "Lcom/margelo/nitro/haptics/HybridHapticsSpec;";
+      std::shared_ptr<JHybridHapticsSpec> getJHybridHapticsSpec();
+    };
+    struct CxxPart: public jni::HybridClass<CxxPart, JHybridObject::CxxPart> {
+      static auto constexpr kJavaDescriptor = "Lcom/margelo/nitro/haptics/HybridHapticsSpec$CxxPart;";
+      static jni::local_ref<jhybriddata> initHybrid(jni::alias_ref<jhybridobject> jThis);
+      static void registerNatives();
+      using HybridBase::HybridBase;
+    protected:
+      std::shared_ptr<JHybridObject> createHybridObject(const jni::local_ref<JHybridObject::JavaPart>& javaPart) override;
+    };
 
-  protected:
-    // C++ constructor (called from Java via `initHybrid()`)
-    explicit JHybridHapticsSpec(jni::alias_ref<jhybridobject> jThis) :
+  public:
+    explicit JHybridHapticsSpec(const jni::local_ref<JHybridHapticsSpec::JavaPart>& javaPart):
       HybridObject(HybridHapticsSpec::TAG),
-      HybridBase(jThis),
-      _javaPart(jni::make_global(jThis)) {}
-
-  public:
+      JHybridObject(javaPart),
+      _javaPart(jni::make_global(javaPart)) {}
     ~JHybridHapticsSpec() override {
       // Hermes GC can destroy JS objects on a non-JNI Thread.
       jni::ThreadScope::WithClassLoader([&] { _javaPart.reset(); });
     }
 
   public:
-    size_t getExternalMemorySize() noexcept override;
-    void dispose() noexcept override;
-    std::string toString() override;
-
-  public:
-    inline const jni::global_ref<JHybridHapticsSpec::javaobject>& getJavaPart() const noexcept {
+    inline const jni::global_ref<JHybridHapticsSpec::JavaPart>& getJavaPart() const noexcept {
       return _javaPart;
     }
 
   public:
     // Properties
-    
+
 
   public:
     // Methods
@@ -60,9 +60,7 @@ namespace margelo::nitro::haptics {
     void performAndroidHaptics(AndroidHaptics type) override;
 
   private:
-    friend HybridBase;
-    using HybridBase::HybridBase;
-    jni::global_ref<JHybridHapticsSpec::javaobject> _javaPart;
+    jni::global_ref<JHybridHapticsSpec::JavaPart> _javaPart;
   };
 
 } // namespace margelo::nitro::haptics

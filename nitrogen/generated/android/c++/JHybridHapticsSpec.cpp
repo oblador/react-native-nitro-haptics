@@ -23,50 +23,51 @@ namespace margelo::nitro::haptics { enum class AndroidHaptics; }
 
 namespace margelo::nitro::haptics {
 
-  jni::local_ref<JHybridHapticsSpec::jhybriddata> JHybridHapticsSpec::initHybrid(jni::alias_ref<jhybridobject> jThis) {
+  std::shared_ptr<JHybridHapticsSpec> JHybridHapticsSpec::JavaPart::getJHybridHapticsSpec() {
+    auto hybridObject = JHybridObject::JavaPart::getJHybridObject();
+    auto castHybridObject = std::dynamic_pointer_cast<JHybridHapticsSpec>(hybridObject);
+    if (castHybridObject == nullptr) [[unlikely]] {
+      throw std::runtime_error("Failed to downcast JHybridObject to JHybridHapticsSpec!");
+    }
+    return castHybridObject;
+  }
+
+  jni::local_ref<JHybridHapticsSpec::CxxPart::jhybriddata> JHybridHapticsSpec::CxxPart::initHybrid(jni::alias_ref<jhybridobject> jThis) {
     return makeCxxInstance(jThis);
   }
 
-  void JHybridHapticsSpec::registerNatives() {
+  std::shared_ptr<JHybridObject> JHybridHapticsSpec::CxxPart::createHybridObject(const jni::local_ref<JHybridObject::JavaPart>& javaPart) {
+    auto castJavaPart = jni::dynamic_ref_cast<JHybridHapticsSpec::JavaPart>(javaPart);
+    if (castJavaPart == nullptr) [[unlikely]] {
+      throw std::runtime_error("Failed to cast JHybridObject::JavaPart to JHybridHapticsSpec::JavaPart!");
+    }
+    return std::make_shared<JHybridHapticsSpec>(castJavaPart);
+  }
+
+  void JHybridHapticsSpec::CxxPart::registerNatives() {
     registerHybrid({
-      makeNativeMethod("initHybrid", JHybridHapticsSpec::initHybrid),
+      makeNativeMethod("initHybrid", JHybridHapticsSpec::CxxPart::initHybrid),
     });
   }
 
-  size_t JHybridHapticsSpec::getExternalMemorySize() noexcept {
-    static const auto method = javaClassStatic()->getMethod<jlong()>("getMemorySize");
-    return method(_javaPart);
-  }
-
-  void JHybridHapticsSpec::dispose() noexcept {
-    static const auto method = javaClassStatic()->getMethod<void()>("dispose");
-    method(_javaPart);
-  }
-
-  std::string JHybridHapticsSpec::toString() {
-    static const auto method = javaClassStatic()->getMethod<jni::JString()>("toString");
-    auto javaString = method(_javaPart);
-    return javaString->toStdString();
-  }
-
   // Properties
-  
+
 
   // Methods
   void JHybridHapticsSpec::impact(ImpactFeedbackStyle style) {
-    static const auto method = javaClassStatic()->getMethod<void(jni::alias_ref<JImpactFeedbackStyle> /* style */)>("impact");
+    static const auto method = _javaPart->javaClassStatic()->getMethod<void(jni::alias_ref<JImpactFeedbackStyle> /* style */)>("impact");
     method(_javaPart, JImpactFeedbackStyle::fromCpp(style));
   }
   void JHybridHapticsSpec::notification(NotificationFeedbackType type) {
-    static const auto method = javaClassStatic()->getMethod<void(jni::alias_ref<JNotificationFeedbackType> /* type */)>("notification");
+    static const auto method = _javaPart->javaClassStatic()->getMethod<void(jni::alias_ref<JNotificationFeedbackType> /* type */)>("notification");
     method(_javaPart, JNotificationFeedbackType::fromCpp(type));
   }
   void JHybridHapticsSpec::selection() {
-    static const auto method = javaClassStatic()->getMethod<void()>("selection");
+    static const auto method = _javaPart->javaClassStatic()->getMethod<void()>("selection");
     method(_javaPart);
   }
   void JHybridHapticsSpec::performAndroidHaptics(AndroidHaptics type) {
-    static const auto method = javaClassStatic()->getMethod<void(jni::alias_ref<JAndroidHaptics> /* type */)>("performAndroidHaptics");
+    static const auto method = _javaPart->javaClassStatic()->getMethod<void(jni::alias_ref<JAndroidHaptics> /* type */)>("performAndroidHaptics");
     method(_javaPart, JAndroidHaptics::fromCpp(type));
   }
 

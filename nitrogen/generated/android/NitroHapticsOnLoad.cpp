@@ -21,24 +21,34 @@
 namespace margelo::nitro::haptics {
 
 int initialize(JavaVM* vm) {
+  return facebook::jni::initialize(vm, []() {
+    ::margelo::nitro::haptics::registerAllNatives();
+  });
+}
+
+struct JHybridHapticsSpecImpl: public facebook::jni::JavaClass<JHybridHapticsSpecImpl, JHybridHapticsSpec::JavaPart> {
+  static auto constexpr kJavaDescriptor = "Lcom/haptics/HybridHaptics;";
+  static std::shared_ptr<JHybridHapticsSpec> create() {
+    static auto constructorFn = javaClassStatic()->getConstructor<JHybridHapticsSpecImpl::javaobject()>();
+    facebook::jni::local_ref<JHybridHapticsSpec::JavaPart> javaPart = javaClassStatic()->newObject(constructorFn);
+    return javaPart->getJHybridHapticsSpec();
+  }
+};
+
+void registerAllNatives() {
   using namespace margelo::nitro;
   using namespace margelo::nitro::haptics;
-  using namespace facebook;
 
-  return facebook::jni::initialize(vm, [] {
-    // Register native JNI methods
-    margelo::nitro::haptics::JHybridHapticsSpec::registerNatives();
+  // Register native JNI methods
+  margelo::nitro::haptics::JHybridHapticsSpec::CxxPart::registerNatives();
 
-    // Register Nitro Hybrid Objects
-    HybridObjectRegistry::registerHybridObjectConstructor(
-      "Haptics",
-      []() -> std::shared_ptr<HybridObject> {
-        static DefaultConstructableObject<JHybridHapticsSpec::javaobject> object("com/haptics/HybridHaptics");
-        auto instance = object.create();
-        return instance->cthis()->shared();
-      }
-    );
-  });
+  // Register Nitro Hybrid Objects
+  HybridObjectRegistry::registerHybridObjectConstructor(
+    "Haptics",
+    []() -> std::shared_ptr<HybridObject> {
+      return JHybridHapticsSpecImpl::create();
+    }
+  );
 }
 
 } // namespace margelo::nitro::haptics
