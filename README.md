@@ -15,6 +15,14 @@
 - Built for **New Architecture** from the start
 - **Drop-in replacement** for `expo-haptics` for ease of adoption
 
+#### Compatibility:
+‼️ Newest versions of `react-native-nitro-haptics` requires [react-native-nitro-modules 0.35.0 or higher](https://github.com/mrousavy/nitro/releases/tag/v0.35.0).
+
+| Compatibility | Supported versions |
+|---|---|
+| `react-native-nitro-modules <= 0.34.*` | `react-native-nitro-haptics <= 0.2.*` |
+| `react-native-nitro-modules >= 0.35.*` | `react-native-nitro-haptics >= 0.3.*` |
+
 ## Installation
 
 You need to install both Nitro Modules core package and Nitro Haptics:

@@ -1,6 +1,6 @@
 {
   "name": "react-native-nitro-haptics",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Low Latency Haptic Feedback with Worklet Support for React Native",
   "main": "./lib/commonjs/index.js",
   "module": "./lib/module/index.js",
@@ -63,12 +63,12 @@
     "conventional-changelog-conventionalcommits": "^9.1.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
-    "nitrogen": "0.31.5",
     "prettier": "^3.3.3",
     "react": "19.1.1",
     "react-native": "0.82",
     "react-native-builder-bob": "^0.37.0",
-    "react-native-nitro-modules": "0.31.5",
+    "react-native-nitro-modules": "0.35.0",
+    "nitrogen": "0.35.0",
     "typescript": "^5.8.3"
   },
   "peerDependencies": {
