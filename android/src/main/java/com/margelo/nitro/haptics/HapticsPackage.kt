@@ -1,4 +1,4 @@
-package com.haptics;
+package com.margelo.nitro.haptics
 
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;

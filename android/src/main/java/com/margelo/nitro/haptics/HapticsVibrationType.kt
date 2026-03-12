@@ -1,4 +1,4 @@
-package com.haptics
+package com.margelo.nitro.haptics
 
 data class HapticsVibrationType(
   val timings: LongArray,

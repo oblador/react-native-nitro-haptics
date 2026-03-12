@@ -1,24 +1,18 @@
-package com.haptics
+package com.margelo.nitro.haptics
 
-import com.margelo.nitro.haptics.HybridHapticsSpec
 import android.content.Context
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
 import android.view.View
 import android.view.HapticFeedbackConstants
 import androidx.annotation.Keep
 import com.facebook.proguard.annotations.DoNotStrip
-import com.haptics.HapticsVibrationType
 import com.margelo.nitro.NitroModules
-import com.margelo.nitro.haptics.AndroidHaptics
-import com.margelo.nitro.haptics.ImpactFeedbackStyle
-import com.margelo.nitro.haptics.NotificationFeedbackType
 
+@DoNotStrip
+@Keep
 class HybridHaptics: HybridHapticsSpec() {
   private val TAG = "Haptics"
 

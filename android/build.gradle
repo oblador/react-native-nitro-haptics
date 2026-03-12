@@ -36,7 +36,7 @@ def getExtOrIntegerDefault(name) {
 }
 
 android {
-  namespace "com.haptics"
+  namespace "com.margelo.nitro.haptics"
 
   ndkVersion getExtOrDefault("ndkVersion")
   compileSdkVersion getExtOrIntegerDefault("compileSdkVersion")
@@ -143,6 +143,6 @@ if (isNewArchitectureEnabled()) {
   react {
     jsRootDir = file("../src/")
     libraryName = "NitroHaptics"
-    codegenJavaPackageName = "com.haptics"
+    codegenJavaPackageName = "com.margelo.nitro.haptics"
   }
 }
