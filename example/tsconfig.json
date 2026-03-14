@@ -6,7 +6,7 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "react-native-nitro-haptics": ["../src/index.ts"]
+      "react-native-nitro-haptics": ["../src"]
     }
   }
 }
