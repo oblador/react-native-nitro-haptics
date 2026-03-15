@@ -132,8 +132,8 @@ class HybridHaptics: HybridHapticsSpec() {
       throw Error("Haptic feedback type '$type' not supported.")
     }
     
-    val view: View = View(NitroModules.applicationContext)
-    view?.performHapticFeedback(feedbackType)
+    val decorView = NitroModules.applicationContext?.currentActivity?.window?.decorView
+    decorView?.performHapticFeedback(feedbackType)
   }
   
   @DoNotStrip
