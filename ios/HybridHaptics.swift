@@ -11,24 +11,46 @@ import NitroModules
 
 /**
  * Implement `HybridHapticsSpec` so we can expose this Swift class to JS.
+ *
+ * Nitro invokes these methods synchronously on the JS thread, but
+ * UIFeedbackGenerator is main-thread-only UIKit API. Every call is bounced to
+ * the main queue, and generators are reused between calls so the underlying
+ * haptic engine is not activated/deactivated on every event.
  */
 class HybridHaptics : HybridHapticsSpec {
+  private var impactGenerators: [UIImpactFeedbackGenerator.FeedbackStyle: UIImpactFeedbackGenerator] = [:]
+  private var notificationGenerator: UINotificationFeedbackGenerator? = nil
+  private var selectionGenerator: UISelectionFeedbackGenerator? = nil
+
   func impact(style: ImpactFeedbackStyle) throws -> Void {
-    let generator = UIImpactFeedbackGenerator(style: style.toUIImpactFeedbackType())
-    generator.prepare()
-    generator.impactOccurred()
+    let uiStyle = style.toUIImpactFeedbackType()
+    DispatchQueue.main.async {
+      let generator: UIImpactFeedbackGenerator
+      if let cached = self.impactGenerators[uiStyle] {
+        generator = cached
+      } else {
+        generator = UIImpactFeedbackGenerator(style: uiStyle)
+        self.impactGenerators[uiStyle] = generator
+      }
+      generator.impactOccurred()
+    }
   }
 
   func notification(type: NotificationFeedbackType) throws -> Void {
-    let generator = UINotificationFeedbackGenerator()
-    generator.prepare()
-    generator.notificationOccurred(type.toUINotificationFeedbackType())
+    let uiType = type.toUINotificationFeedbackType()
+    DispatchQueue.main.async {
+      let generator = self.notificationGenerator ?? UINotificationFeedbackGenerator()
+      self.notificationGenerator = generator
+      generator.notificationOccurred(uiType)
+    }
   }
 
   func selection() throws -> Void {
-    let generator = UISelectionFeedbackGenerator()
-    generator.prepare()
-    generator.selectionChanged()
+    DispatchQueue.main.async {
+      let generator = self.selectionGenerator ?? UISelectionFeedbackGenerator()
+      self.selectionGenerator = generator
+      generator.selectionChanged()
+    }
   }
 
   func performAndroidHaptics(type: AndroidHaptics) throws -> Void {
